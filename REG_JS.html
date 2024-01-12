@@ -1,0 +1,484 @@
+﻿<!-- //Validation of Registration  using  javascript -->
+
+
+<html>
+<head>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+
+        .form-control:hover, .form-select:hover {
+            border-style: solid;
+            border-width: 2px;
+        }
+
+        .container {
+            border-radius: 30px;
+            box-shadow: 0 0 7px 5px rgba(0,0,0,0.5);
+        }
+
+        .form-check-input {
+            border-color: black;
+        }
+    </style>
+
+    <script>
+        function validatechar() {
+            try {
+                var charCode = event.which || event.keyCode;
+                if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || (charCode == 32)) {
+                    return true;
+                }
+                else {
+                    document.getElementById("s-name").innerHTML = "";
+                    return false;
+                }
+            }
+            catch (err) {
+
+            }
+        }
+
+        function validatenumber() {
+            var ascii = event.key;
+            var regex = /^[0-9]+$/;
+            if (!(regex.test(ascii))) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+
+
+        function validatename() {
+            let x = document.getElementById("name").value;
+            if (x != "") {
+
+                var regex = /^[a-zA-Z]+[\s]*[a-zA-Z]*$/;
+                if (!regex.test(x)) {
+
+                    document.getElementById("name").style.borderColor = "red";
+                    document.getElementById("s-name").style.color = "red";
+                    document.getElementById("s-name").innerHTML = "*** Please Enter a Valid First Name!!!.";
+
+                    return false;
+                }
+
+                else if (x.length < 3) {
+                    document.getElementById("name").style.borderColor = "red";
+                    document.getElementById("s-name").style.color = "red";
+                    document.getElementById("s-name").innerHTML = "*** First Name Required atleast 3 character";
+                    return false;
+                }
+
+
+                else {
+                    document.getElementById("name").style.borderColor = "green";
+                    document.getElementById("lname").disabled = false;
+
+                    document.getElementById("s-name").innerHTML = "";
+                    return true;
+                }
+
+            }
+            else {
+                document.getElementById("name").style.borderColor = "red";
+                document.getElementById("s-name").style.color = "red";
+                document.getElementById("s-name").innerHTML = "*** First Name Canot Be Empty!!!";
+                return false;
+            }
+        }
+
+        function validatelastname() {
+            let x = document.getElementById("lname").value;
+            if (x != "") {
+
+                var regex = /^[a-zA-Z]+[\s]*[a-zA-Z]*$/;
+                if (!regex.test(x)) {
+
+                    document.getElementById("lname").style.borderColor = "red";
+                    document.getElementById("s-lname").style.color = "red";
+                    document.getElementById("s-lname").innerHTML = "*** Please Enter a Valid Last Name.";
+
+                    return false;
+                }
+
+                else if (x.length < 3) {
+                    document.getElementById("lname").style.borderColor = "red";
+                    document.getElementById("s-lname").style.color = "red";
+                    document.getElementById("s-lname").innerHTML = "*** Last Name Required atleast 3 character";
+                    return false;
+                }
+
+                else {
+                    document.getElementById("lname").style.borderColor = "green";
+                    document.getElementById("email").disabled = false;
+                    document.getElementById("s-lname").innerHTML = "";
+                    return true;
+                }
+
+            }
+            else {
+                document.getElementById("lname").style.borderColor = "red";
+                document.getElementById("s-lname").style.color = "red";
+                document.getElementById("s-lname").innerHTML = "*** Last Name cannot be Empty!!!";
+                return false;
+            }
+        }
+
+        function validate_email() {
+            let x = document.getElementById("email").value;
+            if (x != "") {
+                var regex = /^[a-zA-z]+[a-zA-Z0-9]+[@@]{1}gmail.com$/;
+                if (!regex.test(x)) {
+                    document.getElementById("email").style.borderColor = "red";
+                    document.getElementById("s-email").style.color = "red";
+                    document.getElementById("s-email").innerHTML = "*** Please Enter a Valid Email.!!";
+
+                    return false;
+                } else {
+                    document.getElementById("email").style.borderColor = "green";
+                    document.getElementById("mobile").disabled = false;
+                    document.getElementById("s-email").innerHTML = "";
+                    return true;
+                }
+
+            }
+            else {
+                document.getElementById("email").style.borderColor = "red";
+                document.getElementById("s-email").style.color = "red";
+                document.getElementById("s-email").innerHTML = "*** Email cannot be Empty !!!";
+                return false;
+            }
+        }
+
+        function validate_mobile() {
+            let x = document.getElementById("mobile").value;
+            if (x != "") {
+
+                var regex = /^(0|91)?[6-9][0-9]{9}$/;
+                if (!regex.test(x)) {
+                    document.getElementById("mobile").style.borderColor = "red";
+                    document.getElementById("s-mobile").style.color = "red";
+                    document.getElementById("s-mobile").innerHTML = "*** Please Enter a valid Mobile.!!!";
+
+                    return false;
+                } else {
+                    document.getElementById("mobile").style.borderColor = "green";
+                    document.getElementById("dob").disabled = false;
+                    document.getElementById("s-mobile").innerHTML = "";
+                    return true;
+                }
+
+            }
+            else {
+                document.getElementById("mobile").style.borderColor = "red";
+                document.getElementById("s-mobile").style.color = "red";
+                document.getElementById("s-mobile").innerHTML = "*** Mobile Cannot be Empty !!!";
+                return false;
+            }
+        }
+
+
+
+        function validate_dob() {
+            let x = document.getElementById("dob").value;
+            var msg = "";
+            if (x != "") {
+                let entered_date = new Date(x);
+                let min_date = new Date("2000-01-01");
+                let max_date = new Date();
+                if (entered_date < min_date) {
+                    msg = "*** DOB cannot be less than 01-01-2000 !!!";
+
+                }
+                else if (entered_date > max_date) {
+                    msg = "*** DOB cannot be greater than current date !!!";
+
+                }
+
+
+                if (msg != "") {
+                    document.getElementById("dob").style.borderColor = "red";
+                    document.getElementById("s-dob").style.color = "red";
+                    document.getElementById("s-dob").innerHTML = msg;
+
+                    return false;
+                }
+
+                else {
+                    document.getElementById("dob").style.borderColor = "green";
+                    document.getElementById("password").disabled = false;
+                    document.getElementById("s-dob").innerHTML = "";
+                    return true;
+                }
+            }
+            else {
+                document.getElementById("dob").style.borderColor = "red";
+                document.getElementById("s-dob").style.color = "red";
+                document.getElementById("s-dob").innerHTML = "*** DOB cannot be empty !!!";
+                return false;
+            }
+        }
+
+        function validate_pass() {
+            let x = document.getElementById("password").value;
+
+            if (x != "") {
+                var regexp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+                if (!regexp.test(x)) {
+                    document.getElementById("password").style.borderColor = "red";
+                    document.getElementById("s-password").style.color = "red";
+                    document.getElementById("s-password").innerHTML = "*** password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters !!!";
+
+                    return false;
+                } else {
+                    document.getElementById("password").style.borderColor = "green";
+                    document.getElementById("gender").disabled = false;
+                    document.getElementById("gender2").disabled = false;
+                    document.getElementById("s-password").innerHTML = "";
+                    return true;
+                }
+
+            }
+            else {
+                document.getElementById("password").style.borderColor = "red";
+                document.getElementById("s-password").style.color = "red";
+                document.getElementById("s-password").innerHTML = "*** Paaword Can Not be Empty!!!";
+                return false;
+            }
+        }
+
+
+        function validate_gender() {
+
+            let gen = document.getElementsByName("gender");
+            var ischeckded = false;
+            for (var i = 0; i < gen.length; i++) {
+                if (gen[i].checked) {
+                    ischeckded = true;
+                    document.getElementById("gender-div").style.borderColor = "green";
+                    document.getElementById("dep").disabled = false;
+                    document.getElementById("s-gender").innerHTML = "";
+                    return true
+                    break;
+                }
+            }
+
+            if (!ischeckded) {
+                document.getElementById("gender-div").style.borderColor = "red";
+                document.getElementById("s-gender").style.color = "red";
+                document.getElementById("s-gender").innerHTML = "*** Select Gender!!!"
+                return false;
+            }
+        }
+
+        function validate_dep() {
+            let x = document.getElementById("dep").value;
+            if (x != "Select Department") {
+                document.getElementById("dep").style.borderColor = "green";
+                document.getElementById("tnc").disabled = false;
+                document.getElementById("s-dep").innerHTML = "";
+                return true;
+            }
+            else {
+                document.getElementById("dep").style.borderColor = "red";
+                document.getElementById("s-dep").style.color = "red";
+                document.getElementById("s-dep").innerHTML = "Select Department";
+                return false;
+            }
+
+        }
+
+        function validate_tnc() {
+            let x = document.getElementById("tnc");
+
+            if (!x.checked) {
+                document.getElementById("tnc").style.borderColor = "red";
+                document.getElementById("s-tnc").style.color = "red";
+                document.getElementById("s-tnc").innerHTML = "*** Accept All the terms  and conditions.!!!";
+                return false;
+            } else {
+                document.getElementById("tnc").style.borderColor = "green";
+                document.getElementById("s-tnc").innerHTML = "";
+                return true;
+            }
+        }
+
+        function runall() {
+            if (validatename() == false) {
+                return false;
+            }
+            if (validatelastname() == false) {
+                return false;
+            }
+            if (validate_email() == false) {
+                return false;
+            }
+            if (validate_mobile() == false) {
+                return false;
+            }
+            if (validate_dob() == false) {
+                return false;
+            }
+
+            if (validate_pass() == false) {
+                return false;
+            }
+
+            if (validate_gender() == false) {
+                return false;
+            }
+            if (validate_dep() == false) {
+                return false;
+            }
+
+            if (validate_tnc() == false) {
+                return false;
+            }
+
+        }
+
+        function disableall() {
+            var ids = ["name", "lname", "email", "mobile", "dob", "password", "gender", "gender2", "dep", "tnc"];
+            for (var i = 1; i < ids.length; i++) {
+                document.getElementById(ids[i]).disabled = true;
+            }
+
+
+        }
+        var c = 1;
+
+        // function enable_one() {
+        // var ids = ["name", "lname", "email", "mobile", "dob", "password","gender", "dep", "tnc"];
+        // console.log(ids[c]);
+        // var old = document.getElementById(ids[c - 1]);
+        // var s_old = document.getElementById("s-" + ids[c - 1]);
+        // if (c != 0 && old.disabled == false && old.value != "" && s_old.innerHTML == "") {
+
+        //     if (ids[c] == "gender") {
+        //         document.getElementById("gender2").disabled = false;
+        //     }
+        //     document.getElementById(ids[c]).disabled = false;
+        //     c++;
+        //}
+
+
+        //}
+
+
+
+
+    </script>
+
+</head>
+<body onload="disableall();" class="bg-image"
+      style="background-image: url('https://img.freepik.com/free-photo/flat-lay-business-desk-frame_23-2148128261.jpg'); background-size: cover ">
+    <div class="row">
+        <div class="col-md-3"></div>
+
+
+        <div class=" container  col-md-6 px-5 bg-image my-5 "
+             style="background-image: url('../../Content/a.jpg'); background-size:cover">
+            <div class="row text-center my-3 py-3 text-primary fw-bold ">
+                <h1> Registration Form</h1>
+            </div>
+
+            <form id="myform" action="a.gvg">
+
+
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-user "></i></span>
+                    <input type="text" id="name" onchange="validatename();" onkeypress="return validatechar();" class="form-control" placeholder="First Name" name="fname" autocomplete="off">
+                </div>
+                <label id="s-name"></label>
+
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text"><i class="fa fa-user "></i></span>
+                    <input type="text" class="form-control" onchange="validatelastname();" onkeypress="return validatechar();" placeholder="Last Name" id="lname" name="lname" autocomplete="off">
+                </div>
+                <label id="s-lname"></label>
+
+
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text"> <i class="fa fa-envelope "></i> </span>
+                    <input type="email" placeholder="Email" onchange="validate_email();" class="form-control" name="email" id="email" autocomplete="off">
+                </div>
+                <label id="s-email"></label>
+
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text"> <i class="fa fa-phone "></i> </span>
+                    <input type="text" placeholder="Phone number" onchange="validate_mobile();" onkeypress="return validatenumber();" class="form-control" name="phone" id="mobile" autocomplete="off">
+                </div>
+                <label id="s-mobile"></label>
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text"> <i class="fa fa-calendar"></i></span>
+                    <input type="date" placeholder="Dateofbirth" onchange="validate_dob();" class="form-control" name="dob" id="dob">
+                </div>
+                <label id="s-dob"></label>
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i></span>
+                    <input type="password" placeholder="Password" onchange="validate_pass();" class="form-control" name="password" id="password">
+                </div>
+                <label id="s-password"></label>
+
+
+
+                <div class="input-group col-md-12 mt-3">
+                    <span class="input-group-text"><i class="fa fa-male"></i><i class="fa fa-female"></i></span>
+                    <div class="form-control" id="gender-div">
+                        <input type="radio" onclick="validate_gender();" class="ms-2 form-check-input bdr" value="male" name="gender" id="gender" />
+                        <label for="male" class="form-check-label">Male</label>
+
+                        <input type="radio" onclick="validate_gender();" class="ms-5 form-check-input bdr" value="female" name="gender" id="gender2" />
+                        <label for="female" class="form-check-label">Female</label>
+                    </div>
+                </div>
+                <p id="s-gender"></p>
+
+                <div class="input-group mt-3">
+                    <span class="input-group-text"> <i class="fa fa-building"></i></span>
+                    <select class="form-select" onchange="validate_dep();" name="dep" id="dep">
+                        <option>Select Department</option>
+                        <option>B.tech</option>
+                        <option>M.C.A</option>
+                        <option>B.C.A</option>
+                        <option>B.B.A</option>
+                    </select>
+                </div>
+                <label id="s-dep"></label>
+
+
+                <div class="form-check checkbox-lg mt-4">
+                    <input class="form-check-input border border-dark" type="checkbox" onclick="validate_tnc();" name="check" id="tnc" value="yes">
+                    <label class="form-check-label mx-4 "> I agree to all the statements in <a href="#"><u>Terms and conditions.</u></a></label>
+                </div>
+                <p id="s-tnc"></p>
+
+                <div class="text-center mb-5">
+                    <input type="submit" class="btn btn-primary btn-lg  mt-4" name="submit" onclick="return runall();" value="Submit">
+                </div>
+            </form>
+
+            <div class="text-center text-muted mt-5 mb-0">
+                Have already an account? <a href="#" class="fw-bold"><u>Login here</u></a>
+            </div>
+        </div>
+
+
+        <div class="col-md-3"></div>
+    </div>
+</body>
+</html>
